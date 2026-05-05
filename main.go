@@ -24,8 +24,21 @@ func main() {
 
 	todo, err := c.GetTodo(context.Background())
 	if err != nil {
-		slog.Error("get request failed", "err", err)
+		slog.Error("GET request failed", "err", err)
 		return
 	}
 	slog.Info("todo", "id", todo.ID, "title", todo.Title, "completed", todo.Completed)
+
+	post := client.PostBody{
+		UserID: 1,
+		ID:     1,
+		Title:  "my title",
+		Body:   "my body",
+	}
+	result, err := c.PostPost(context.Background(), post)
+	if err != nil {
+		slog.Error("POST request failed", "err", err)
+		return
+	}
+	slog.Info("post", "userId", result.UserID, "id", result.ID, "title", result.Title, "completed", result.Body)
 }
