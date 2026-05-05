@@ -40,5 +40,11 @@ func main() {
 		slog.Error("POST request failed", "err", err)
 		return
 	}
-	slog.Info("post", "userId", result.UserID, "id", result.ID, "title", result.Title, "completed", result.Body)
+	slog.Info("post", "userId", result.UserID, "id", result.ID, "title", result.Title, "body", result.Body)
+
+	if err := c.DeletePost(context.Background()); err != nil {
+		slog.Error("DELETE request failed", "err", err)
+		return
+	}
+	slog.Info("delete successful")
 }
